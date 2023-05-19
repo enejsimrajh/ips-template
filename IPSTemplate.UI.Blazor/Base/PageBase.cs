@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Localization;
 
-namespace IPSDiva.Ui.Blazor;
+namespace IPSTemplate.UI.Blazor.Base;
 
 public abstract class PageBase : ComponentBase
 {
-    [Inject] internal IStringLocalizer<IPSTemplate.UI.Blazor.Properties.Resources> Localizer { get; set; } = default!;
+    [Inject] internal IStringLocalizer<Properties.Resources> Localizer { get; set; } = default!;
 }

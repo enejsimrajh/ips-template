@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel;
-using Csla.Blazor;
 using IPSBlazor.Models.Generic;
-using Microsoft.AspNetCore.Components;
 
-namespace IPSDiva.Ui.Blazor.Shared;
+namespace IPSTemplate.UI.Blazor.Base;
 
 public abstract class EditGroup<TModel, TViewModel> : ComponentBase, IDisposable
     where TModel : Csla.Core.BindableBase

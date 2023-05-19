@@ -1,0 +1,29 @@
+﻿@page "/author/edit/{ItemId?}"
+
+@using BusinessLibrary.BO.Author
+@using Dal.Models
+
+@inherits EditView<TEAuthorBO, TEAuthor>
+
+@if (ViewModel?.Model is null)
+{
+    <IPSLoader />
+    return;
+}
+
+@if (Error is not null)
+{
+    @Error
+    return;
+}
+
+<IPSForm Model=ViewModel>
+    <FormFields>
+        <IPSFormField Property=@ViewModel.GetProperty(() => ViewModel.Model.FirstName) />
+        <IPSFormField Property=@ViewModel.GetProperty(() => ViewModel.Model.LastName) />
+        <IPSFormField Property=@ViewModel.GetProperty(() => ViewModel.Model.BirthYear) />
+    </FormFields>
+    <FormButtons>
+        <IPSFormSaveButton />
+    </FormButtons>
+</IPSForm>

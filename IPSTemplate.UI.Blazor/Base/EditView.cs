@@ -4,7 +4,7 @@ using Core.DAL.Infrastructure;
 using Core.Library.Base;
 using IPSBlazor.Services;
 
-namespace IPSDiva.Ui.Blazor.Shared;
+namespace IPSTemplate.UI.Blazor.Base;
 
 public partial class EditView<TModel, TEntity> : PageBase, IDisposable
     where TModel : CslaBusinessBase<TModel, TEntity>

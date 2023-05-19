@@ -1,7 +1,6 @@
 ﻿@inject IStringLocalizer<Resources> Localizer
 
 <IPSNavMenu>
-    <AuthorizeView>
-        <IPSNavMenuLink Link="/" IconClass="fa-solid fa-house">@Localizer["NavMenu_Home"]</IPSNavMenuLink>
-    </AuthorizeView>
+    <IPSNavMenuLink Link="/" IconClass="fa-solid fa-house">@Localizer["NavMenu_Home"]</IPSNavMenuLink>
+    <IPSNavMenuLink Link="/author" IconClass="fa-solid fa-user">Author</IPSNavMenuLink>
 </IPSNavMenu>
