@@ -1,12 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Core.DAL.Models;
 using IPSTemplate.Dal.Models;
+using IPSTemplate.Dal.Models.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Core.DALEF.ContextFactory;
 
-public class Context : DbContext
+public class Context : IdentityDbContext<TEIdentityUser, TEIdentityRole, Guid>
 {
     public Context(DbContextOptions<Context> options) : base(options)
     {
@@ -38,6 +41,7 @@ public class Context : DbContext
             fk.DeleteBehavior = DeleteBehavior.Restrict;
         }
 
+        modelBuilder.ConfigureIdentity();
         modelBuilder.ApplyUtcDateTimeConverter();
         modelBuilder.Seed();
     }
@@ -64,6 +68,18 @@ public class Context : DbContext
     #region Own models
 
     public DbSet<TEEntity> TEEntity { get; set; } = default!;
+
+    #endregion
+
+    #region Identity models
+
+    public DbSet<TEIdentityUser> TEIdentityUser { get; set; }
+    public DbSet<TEIdentityRole> TEIdentityRole { get; set; }
+    public DbSet<IdentityUserRole<Guid>> IdentityUserRole { get; set; }
+    public DbSet<IdentityUserClaim<Guid>> IdentityUserClaim { get; set; }
+    public DbSet<IdentityUserLogin<Guid>> IdentityUserLogin { get; set; }
+    public DbSet<IdentityRoleClaim<Guid>> IdentityRoleClaim { get; set; }
+    public DbSet<IdentityUserToken<Guid>> IdentityUserToken { get; set; }
 
     #endregion
 

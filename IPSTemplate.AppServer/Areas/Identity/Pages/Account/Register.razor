@@ -1,0 +1,22 @@
+﻿@page "/account/register"
+
+<h1>Register</h1>
+@*<IPSRow>
+    <IPSColumn Md="4">
+        <h2>Create a new account.</h2>
+        <hr />
+        <IPSForm Model=ViewModel OnValidSubmit=RegisterUser>
+            <FormFields>
+                <IPSTextBox Property=@(ViewModel.GetProperty(() => ViewModel.Model.Email)) />
+                <IPSTextBox Property=@(ViewModel.GetProperty(() => ViewModel.Model.Password)) />
+                <IPSTextBox Property=@(ViewModel.GetProperty(() => ViewModel.Model.ConfirmPassword)) />
+                <IPSTextBox Property=@(ViewModel.GetProperty(() => ViewModel.Model.Name)) />
+                <IPSTextBox Property=@(ViewModel.GetProperty(() => ViewModel.Model.Surname)) />
+            </FormFields>
+            <FormButtons>
+                <IPSButton Color=Color.Primary>Register</IPSButton>
+            </FormButtons>
+        </IPSForm>
+        @_actionResult?.AsAlert()
+    </IPSColumn>
+</IPSRow>*@

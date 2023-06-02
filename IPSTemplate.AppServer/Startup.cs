@@ -6,7 +6,12 @@ using IPSBlazor.Configuration;
 using IPSTemplate.AppServer.Filters;
 using IPSTemplate.AppServer.Helpers;
 using IPSTemplate.AppServer.Middleware;
+using IPSTemplate.AppServer.Services;
+using IPSTemplate.BusinessLibrary.Interfaces;
+using IPSTemplate.Dal.Models.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -66,6 +71,11 @@ namespace IPSTemplate.AppServer
             // user management & security services using aspnetcore identity
             services.AddDbContext<Context>(options => options.UseSqlServer(EnvironmentHelper.GetConnectionString("ContextConnectionString")));
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddDefaultIdentity<TEIdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                    .AddRoles<TEIdentityRole>()
+                    .AddEntityFrameworkStores<Context>()
+                    .AddDefaultTokenProviders();
+            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<TEIdentityUser>>();
             // end of user management & security services using aspnetcore identity
 
             // configure Cors
@@ -165,7 +175,6 @@ namespace IPSTemplate.AppServer
 
             services.AddRazorPages();
             services.AddServerSideBlazor().AddHubOptions(config => config.MaximumReceiveMessageSize = 1048576 * 100);
-
             services.AddLocalization();
             services.AddScoped(httpClient => new HttpClient
             {
@@ -178,6 +187,7 @@ namespace IPSTemplate.AppServer
             // end of CSLA settings
 
             services.AddIPSBlazor();
+            services.AddScoped<IUserService, UserService>();
 
             //Configure StartUp routines
             services.AddTransient<IStartupFilter, StartupFilter>();
